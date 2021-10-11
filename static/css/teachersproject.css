@@ -1,0 +1,16 @@
+/*================================================================================================= */
+/* 参考サイト
+    初心者向けCSS（スタイルシート）入門：基本的な書き方を総まとめ！
+    https://saruwakakun.com/html-css/basic/css#section3
+    基礎から学ぶ！HTMLにCSSを適用（読み込み）させる方法【初心者向け】
+    https://techacademy.jp/magazine/9647
+
+------------------------------------------------------------------------------------------------------*/
+
+/* jumbotron */
+header.jumbotron2 {
+  background: url("/static/images/header01.png");
+  background-position: center center;
+  background-size: cover;
+  color: #fff;
+}
