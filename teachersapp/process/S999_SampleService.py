@@ -1,4 +1,3 @@
-from ..models import Task
 
 def main():
     errflg = "0"

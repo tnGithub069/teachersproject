@@ -10,7 +10,6 @@ flg_return==1の時、「path_name」必須
 """
 
 from django.urls import reverse
-from . import D000_Sample_SetDisp
 from . import S999_SampleService
 from . import C010_Const
 
@@ -42,5 +41,5 @@ def main(request):
         template = 'teachersapp/D999_Sample.html'
         context = S999_SampleService.main()["json_TaskList"]
     #戻り値用のjsonを作成
-    json_view = {'flg_return':flg_return, template':template, 'context':context, 'path_name':path_name}
+    json_view = {'flg_return':flg_return, 'template':template, 'context':context, 'path_name':path_name}
     return json_view

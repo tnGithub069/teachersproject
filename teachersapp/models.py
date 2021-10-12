@@ -13,7 +13,7 @@ Djangoのモデルの各フィールドの使い方まとめ「その１」
 https://www.nblog09.com/w/2019/05/14/django-field/
 
 """
-
+"""
 #T100_質問テーブル
 class T100_SHITSMN(models.Model):
     #テーブル固有項目
@@ -48,3 +48,5 @@ class T101_SHITSMNHASHTAG(models.Model):
     DELFLG = models.CharField(max_length=1)
     def __str__(self):
         return self.SHITSMN_TITLE
+
+"""
