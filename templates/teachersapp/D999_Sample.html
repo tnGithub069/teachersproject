@@ -13,6 +13,13 @@
 
         {% block content %}
             サンプル画面コンテンツ
+            {% if list_shitsmnIchirn %}
+                <div >
+                    {% for shitsmn in list_shitsmnIchirn %}
+                        <br>■{{ shitsmn.SHITSMN_TITLE}}
+                    {% endfor %}
+                </div>
+            {% endif %}
         {% endblock content %}
     <!-- </body>>-->
 <!-- </html>-->

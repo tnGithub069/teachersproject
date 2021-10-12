@@ -32,14 +32,14 @@ def main(request):
     else:
         #POST以外の場合
         """
-        POST時の処理を書く。
+        POST以外時の処理を書く。
         パターンに応じてflg_returnの値を設定する。
         bottunパターンによって処理を分けたりもするかも。
         例は、render
         """
         flg_return = "0"
         template = 'teachersapp/D999_Sample.html'
-        context = S999_SampleService.main()["json_TaskList"]
+        context = S999_SampleService.main()["json_shitsmnIchirn"]
     #戻り値用のjsonを作成
     json_view = {'flg_return':flg_return, 'template':template, 'context':context, 'path_name':path_name}
     return json_view
