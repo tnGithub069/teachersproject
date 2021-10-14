@@ -13,10 +13,19 @@
 
         {% block content %}
             サンプル画面コンテンツ
+            {% if messages %}
+                <div class="messages">
+                    <br>メッセージ表示エリア-------------------------------------
+                        {% for message in messages %}
+                            <br>{{ message }}
+                        {% endfor %}
+                    <br>--------------------------------------------------------
+                </div>
+            {% endif %}
             {% if list_shitsmnIchirn %}
                 <div >
                     {% for shitsmn in list_shitsmnIchirn %}
-                        <br>■{{ shitsmn.SHITSMN_TITLE}}
+                        <br>■{{ shitsmn.SHITSMN_TITLE}},{{ shitsmn.SHITSMN_NAIYO}}
                     {% endfor %}
                 </div>
             {% endif %}

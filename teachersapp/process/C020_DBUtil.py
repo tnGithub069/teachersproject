@@ -1,5 +1,6 @@
 """
-C020_TPDBUtilクラス
+共通クラス
+C020_DBUtil
 DB関連の共通メソッドを格納する
 
 ■PythonでMySQLに接続する方法【初心者向け】現役エンジニアが解説
@@ -11,6 +12,7 @@ https://gametech.vatchlog.com/2019/05/07/mysqlclient-utf-8/
 """
 # MySQLdbのインポート
 import MySQLdb
+
 
 def connectDB():
     # データベースへの接続とカーソルの生成
@@ -26,8 +28,18 @@ def connectDB():
     json_DBConnectInfo = {'con':connection,'cur':cursor}
     return json_DBConnectInfo
 
- 
-def closeDB(connection,errflg):
+
+def executeSQL(json_DBConnectInfo, sql, args):
+    cur = json_DBConnectInfo['cur']
+    #クエリを実行
+    cur.execute(sql,args)
+    # 実行結果を取得する
+    result = cur.fetchall()
+    return result
+
+
+def closeDB(json_DBConnectInfo,errflg):
+    connection = json_DBConnectInfo['con']
     if errflg == "0":
         # コミット
         connection.commit()
