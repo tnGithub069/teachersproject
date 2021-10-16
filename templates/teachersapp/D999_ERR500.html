@@ -1,9 +1,17 @@
-<html>
-    <header>
-        {% load static %}
-        <link rel="stylesheet" href="{% static '/css/teachersproject.css' %}">
-    </header>
-    <body>
-        <h1>システムエラー</h1>
-    </body>
-</html>
+{% extends "teachersapp/D000_Base.html" %}
+<!-- <html-->
+    <!-- <header> -->
+        {% block head %}
+            {% load static %}
+            <link rel="stylesheet" href="{% static '/css/teachersproject.css' %}">
+        {% endblock head %}
+    <!-- </header> -->
+    <!-- <body> -->
+        {% block header %}
+            <h1>システムエラー</h1>
+        {% endblock header %}
+        {% block content %}
+            <h1>システムエラー</h1>
+        {% endblock content %}
+    <!-- </body>>-->
+<!-- </html>-->

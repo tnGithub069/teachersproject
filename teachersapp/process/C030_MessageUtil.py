@@ -5,6 +5,8 @@ C030_MessageUtil
 
 """
 import MySQLdb
+from logging import getLogger
+import traceback
 
 from django.contrib import messages
 
@@ -22,6 +24,7 @@ def setMessage(request,msgID,tuple_msgPalams):
     msgNaiyo = json_MessageInfo["msgNaiyo"]
     #取得したメッセージをDjangoのメッセージオブジェクトに格納する
     messages.add_message(request, msgLevel, msgNaiyo)
+    return
 
 
 """
@@ -33,6 +36,7 @@ def setMessageList(request,list_msgInfo):
         msgLevel = json_MessageInfo["msgLevel"]
         msgNaiyo = json_MessageInfo["msgNaiyo"]
         messages.add_message(request, msgLevel, msgNaiyo)
+    return
 
 
 """
@@ -85,3 +89,35 @@ def getMessageInfo_DB(msgID):
     #戻り値に設定
     json_MessageInfo_DB = {"msgLevel" : msgLevel, "msgNaiyo" : msgNaiyo}
     return json_MessageInfo_DB
+
+
+"""
+★
+DEBUG用。本番環境では不要。
+try~exceptで囲むと、コンソールにエラー情報が出ない。これを出力させるためのもの。
+
+def printMessage_traceback():
+    
+    #開発環境
+    print("[システムエラー]：",traceback.format_exc())
+    #本番環境
+    #何もしない
+    return
+"""
+"""
+★
+メッセージをログに出力するためのもの。
+"""
+def loggingMessage_traceback():
+    logger = getLogger(__name__)
+    #開発環境
+    #logger.error(f'TeachersProjectSystemError service_id:{SERVICE_ID}')
+    msg = "[システムエラー]：" + traceback.format_exc()
+    logger.error(f'{msg}')
+    return
+
+def systemErrorCommonMethod():
+    #コンソールにエラーを出力
+    #printMessage_traceback()
+    #ログにエラーを出力
+    loggingMessage_traceback()

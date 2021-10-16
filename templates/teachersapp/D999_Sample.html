@@ -22,6 +22,8 @@
                     <br>--------------------------------------------------------
                 </div>
             {% endif %}
+            <br>----------------------------------------------------------------------------------------------
+            <br><div class="debug">S999検証</div>
             {% if list_shitsmnIchirn %}
                 <div >
                     {% for shitsmn in list_shitsmnIchirn %}
@@ -29,6 +31,25 @@
                     {% endfor %}
                 </div>
             {% endif %}
+            <br>---------------------------------------------------------------------------------------------
+            <br><div class="debug">S050検証</div>
+            {% if list_shitsmnList_shinchk %}
+                <div >
+                    {% for shitsmn_shinchk in list_shitsmnList_shinchk %}
+                        <br>■{{ shitsmn_shinchk.SHITSMN_TITLE}},{{ shitsmn_shinchk.SHITSMN_NAIYO}}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <br>---------------------------------------------------------------------------------------------
+            <br><div class="debug">S180検証</div>
+            {% if list_hanyoMst %}
+                <div >
+                    {% for hanyo in list_hanyoMst %}
+                        <br>■{{ hanyo.SECCD}},{{ hanyo.CD}},{{ hanyo.NAIYO01}}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <br>---------------------------------------------------------------------------------------------
         {% endblock content %}
     <!-- </body>>-->
 <!-- </html>-->
