@@ -1,12 +1,12 @@
 """
 共通クラス
-C050_StringUtil
+C060_ListUtil
 セッション関連の共通メソッドを格納する
 
 """
 
-def isNullCharacter(_str_):
+def isZeroList(_list_):
     result = False
-    if _str_ == None or _str_ == "":
+    if len(_list_) == 0 :
         result = True
     return result

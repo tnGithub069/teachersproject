@@ -1,4 +1,4 @@
-{% extends "teachersapp/D000_Base.html" %}
+{% extends "teachersapp/T000_Base.html" %}
 <!-- <html-->
     <!-- <header> -->
         {% block head %}
@@ -33,9 +33,25 @@
             {% endif %}
             <br>---------------------------------------------------------------------------------------------
             <br><div class="debug">S050検証</div>
+            {% if json_shitsmnInfo %}
+                <div >
+                    <br>■{{ json_shitsmnInfo.SHITSMN_TITLE}},{{ json_shitsmnInfo.SHITSMN_NAIYO}}
+                </div>
+            {% endif %}
+            <br>---------------------------------------------------------------------------------------------
+            <br><div class="debug">S060検証</div>
             {% if list_shitsmnList_shinchk %}
                 <div >
                     {% for shitsmn_shinchk in list_shitsmnList_shinchk %}
+                        <br>■{{ shitsmn_shinchk.SHITSMN_TITLE}},{{ shitsmn_shinchk.SHITSMN_NAIYO}}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <br>---------------------------------------------------------------------------------------------
+            <br><div class="debug">S070検証</div>
+            {% if tuple_T100_shitsmnList_jokn %}
+                <div >
+                    {% for shitsmn_shinchk in tuple_T100_shitsmnList_jokn %}
                         <br>■{{ shitsmn_shinchk.SHITSMN_TITLE}},{{ shitsmn_shinchk.SHITSMN_NAIYO}}
                     {% endfor %}
                 </div>

@@ -7,6 +7,8 @@ from .process import (
 )
 from .process import C010_Const,C030_MessageUtil
 
+ERR_PATH_NAME = "SystemError/"
+
 #記載例
 def v999_sampleMethod(request):
     try:
@@ -27,8 +29,7 @@ def v999_sampleMethod(request):
         #システムエラー共通処理
         C030_MessageUtil.systemErrorCommonMethod()
         #システムエラー画面に遷移
-        path_name = "systemError"
-        return redirect(path_name)
+        return redirect(ERR_PATH_NAME)
         
 
 def v999_sampleMethod2(request):
@@ -47,15 +48,14 @@ def v999_sampleMethod2(request):
             path_name = json_view["path_name"]
             return redirect(path_name)
     except Exception as e :
-        #エラーフラグを「2：システムエラー」にする
-        errflg = "2"
-        #コンソールにエラーを出力
+        #システムエラー共通処理
         C030_MessageUtil.systemErrorCommonMethod()
-        raise(e)
+        #システムエラー画面に遷移
+        return redirect(ERR_PATH_NAME)
 
 
 def v999_systemError(request):
-    template = 'teachersapp/D999_ERR500.html'
+    template = 'teachersapp/T900_ERR500.html'
     context = {}
     try:
         return render(request, template, context)
