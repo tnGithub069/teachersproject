@@ -32,6 +32,27 @@
                 </div>
             {% endif %}
             <br>---------------------------------------------------------------------------------------------
+            <br><div class="debug">S020検証</div>
+            {% if json_shitsmnInfo_S050_S020Kensho %}
+                <div >
+                    <br>■{{ json_shitsmnInfo_S050_S020Kensho.SHITSMN_TITLE}},{{ json_shitsmnInfo_S050_S020Kensho.SHITSMN_NAIYO}}
+                </div>
+            {% endif %}
+            <br>---------------------------------------------------------------------------------------------
+            <br><div class="debug">S030検証</div>
+            {% if json_shitsmnInfo_S050_S030Kensho %}
+                <div >
+                    <br>■{{ json_shitsmnInfo_S050_S030Kensho.SHITSMN_TITLE}},{{ json_shitsmnInfo_S050_S030Kensho.SHITSMN_NAIYO}}
+                </div>
+            {% endif %}
+            <br>---------------------------------------------------------------------------------------------
+            <br><div class="debug">S040検証</div>
+            {% if json_shitsmnInfo_S050_S040Kensho %}
+                <div >
+                    <br>■{{ json_shitsmnInfo_S050_S040Kensho.SHITSMN_TITLE}},{{ json_shitsmnInfo_S050_S040Kensho.SHITSMN_NAIYO}}
+                </div>
+            {% endif %}
+            <br>---------------------------------------------------------------------------------------------
             <br><div class="debug">S050検証</div>
             {% if json_shitsmnInfo %}
                 <div >
@@ -40,9 +61,9 @@
             {% endif %}
             <br>---------------------------------------------------------------------------------------------
             <br><div class="debug">S060検証</div>
-            {% if list_shitsmnList_shinchk %}
+            {% if tuple_shitsmnList_shinchk %}
                 <div >
-                    {% for shitsmn_shinchk in list_shitsmnList_shinchk %}
+                    {% for shitsmn_shinchk in tuple_shitsmnList_shinchk %}
                         <br>■{{ shitsmn_shinchk.SHITSMN_TITLE}},{{ shitsmn_shinchk.SHITSMN_NAIYO}}
                     {% endfor %}
                 </div>
@@ -51,18 +72,34 @@
             <br><div class="debug">S070検証</div>
             {% if tuple_T100_shitsmnList_jokn %}
                 <div >
-                    {% for shitsmn_shinchk in tuple_T100_shitsmnList_jokn %}
-                        <br>■{{ shitsmn_shinchk.SHITSMN_TITLE}},{{ shitsmn_shinchk.SHITSMN_NAIYO}}
+                    {% for shitsmn_jokn in tuple_T100_shitsmnList_jokn %}
+                        <br>■{{ shitsmn_jokn.SHITSMN_TITLE}},{{ shitsmn_jokn.SHITSMN_NAIYO}}
                     {% endfor %}
                 </div>
             {% endif %}
             <br>---------------------------------------------------------------------------------------------
-            <br><div class="debug">S180検証</div>
+            <br><div class="debug">S090検証</div>
+            {% if tuple_M110_kaigiJiknList_S090 %}
+                <div >
+                    {% for kaigiJikn in tuple_M110_kaigiJiknList_S090 %}
+                        <br>■{{ kaigiJikn.KAIGJKN_CD}},{{ kaigiJikn.KAIGJKN_TIME}},{{ kaigiJikn.KAIGJKN_DISP}}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <br>---------------------------------------------------------------------------------------------
+            <br><div class="debug">S900検証</div>
             {% if list_hanyoMst %}
                 <div >
                     {% for hanyo in list_hanyoMst %}
                         <br>■{{ hanyo.SECCD}},{{ hanyo.CD}},{{ hanyo.NAIYO01}}
                     {% endfor %}
+                </div>
+            {% endif %}
+            <br>---------------------------------------------------------------------------------------------
+            <br><div class="debug">S905検証</div>
+            {% if str_newID %}
+                <div >
+                    {{str_newID}}
                 </div>
             {% endif %}
             <br>---------------------------------------------------------------------------------------------

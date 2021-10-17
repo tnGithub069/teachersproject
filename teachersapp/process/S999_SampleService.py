@@ -41,7 +41,8 @@ def main():
         #戻り値の共通項目を作成
         json_CommonInfo = {"errflg":errflg, "list_msgInfo" : list_msgInfo}
         #戻り値を作成
-        json_service = {"json_CommonInfo":json_CommonInfo, "list_shitsmnIchirn" : rows}
+        rows = [] #大量に出てくるため初期化
+        json_service = {"json_CommonInfo":json_CommonInfo, "tuple_shitsmnIchirn" : rows}
         return json_service
     #==例外処理==========================================================================================
     except Exception as e :

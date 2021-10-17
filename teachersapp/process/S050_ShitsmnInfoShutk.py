@@ -22,7 +22,7 @@ def main(shitsmn_id):
         #DB接続開始、コネクションとカーソルを取得
         json_DBConnectInfo = C020_DBUtil.connectDB()
         #クエリを定義
-        sql = "select SHITSMN_ID,SHITSMN_TITLE,SHITSMN_NAIYO,SHITSMN_USERID,KAIGIID,CRTDATE,UPDDATE from t100_shitsmn where SHITSMN_ID = %s ;"
+        sql = "select SHITSMN_ID,SHITSMN_TITLE,SHITSMN_NAIYO,SHITSMN_USERID,KAIGIID,CRTDATE,UPDDATE from t100_shitsmn where SHITSMN_ID = %s  and DELFLG = '0' ;"
         #パラメータを定義
         args = (shitsmn_id,)
         #クエリを実行し、結果を取得
@@ -48,5 +48,9 @@ def main(shitsmn_id):
         return json_service
     #==例外処理==========================================================================================
     except Exception as e :
+        #エラーフラグを立てる
+        errflg = "1"
+        #DB接続終了（ロールバック）
+        C020_DBUtil.closeDB(json_DBConnectInfo,errflg)
         raise
     #====================================================================================================
