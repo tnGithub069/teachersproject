@@ -45,5 +45,12 @@ def main():
         json_service = {"json_CommonInfo":json_CommonInfo, "tuple_shitsmnIchirn" : rows}
         return json_service
     #==例外処理==========================================================================================
+    except C020_DBUtil.MySQLDBException as e :
+        #エラーフラグを立てる
+        errflg = "1"
+        #DB接続終了（ロールバック）
+        C020_DBUtil.closeDB(json_DBConnectInfo,errflg)
+        raise
     except Exception as e :
         raise
+    #====================================================================================================

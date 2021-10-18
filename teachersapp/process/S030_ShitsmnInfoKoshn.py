@@ -1,6 +1,6 @@
 """
 サービスクラス
-S030_ShitsmnInfoKoshin
+S030_ShitsmnInfoKoshn
 
 戻り値：{共通項目、任意項目1、任意項目2、...}
         └共通項目：{実行結果（エラーフラグ）、メッセージリスト}
@@ -98,10 +98,12 @@ def main(shitsmnID,shitsmnTitle,shitsmnNaiyo,shitsmnUserID,kaigiID,list_hashTag,
         json_service = {"json_CommonInfo":json_CommonInfo, "str_shitsmnID":shitsmnID}
         return json_service
     #==例外処理==========================================================================================
-    except Exception as e :
+    except C020_DBUtil.MySQLDBException as e :
         #エラーフラグを立てる
         errflg = "1"
         #DB接続終了（ロールバック）
         C020_DBUtil.closeDB(json_DBConnectInfo,errflg)
+        raise
+    except Exception as e :
         raise
     #====================================================================================================

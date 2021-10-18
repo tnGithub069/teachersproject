@@ -51,11 +51,12 @@ def main(tableID,header):
         return json_service
 
     #==例外処理==========================================================================================
-    except Exception as e :
+    except C020_DBUtil.MySQLDBException as e :
         #エラーフラグを立てる
         errflg = "1"
-        #B.エラーが発生した場合、ロールバックする。何も返さない。
         #DB接続終了（ロールバック）
         C020_DBUtil.closeDB(json_DBConnectInfo,errflg)
+        raise
+    except Exception as e :
         raise
     #====================================================================================================

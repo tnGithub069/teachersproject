@@ -10,16 +10,22 @@ flg_return==1の時、「path_name」必須
 
 """
 
+import datetime
 from django.urls import reverse
 from . import S999_SampleService
 from . import (C010_Const,C030_MessageUtil,
                 S020_ShitsmnInfoTork,
-                S030_ShitsmnInfoKoshin,
+                S030_ShitsmnInfoKoshn,
                 S040_ShitsmnInfoSakj,
                 S050_ShitsmnInfoShutk,
                 S060_ShitsmnListShutk_Shinchk,
                 S070_ShitsmnListShutk_Jokn,
                 S090_KaigiJiknListShutk,
+                S150_UserInfoTork,
+                S160_UserInfoKoshn,
+                S170_UserInfoSakj,
+                S180_UserInfoShutk,
+                S185_UserInfoShutk_SysLogin,
                 S900_HanyoMstShutk,
                 S905_SaibnMstShtk
 )
@@ -92,7 +98,7 @@ def main(request):
                                     {"KAISHNCHJ":"2021-10-23 18:00:00","SHURYNCHJ":"2021-10-23 18:00:00","KAIGIJIKN":30},
                                     {"KAISHNCHJ":"2021-10-24 13:00:00","SHURYNCHJ":"2021-10-24 13:30:00","KAIGIJIKN":30}
                                 ]
-            json_S030 = S030_ShitsmnInfoKoshin.main(shitsmnID,shitsmnTitle,shitsmnNaiyo,shitsmnUserID,kaigiID,list_hashTag,list_kaigikibujikn,updUserID,"0")
+            json_S030 = S030_ShitsmnInfoKoshn.main(shitsmnID,shitsmnTitle,shitsmnNaiyo,shitsmnUserID,kaigiID,list_hashTag,list_kaigikibujikn,updUserID,"0")
             #個々の値を取得
             flg_S030 = json_S030["json_CommonInfo"]["errflg"]
             list_msgInfo_S030 = json_S030["json_CommonInfo"]["list_msgInfo"]
@@ -162,6 +168,79 @@ def main(request):
             #メッセージ格納
             C030_MessageUtil.setMessageList(request,list_msgInfo_S090)
             #-------------------------------------------------------------------------------
+            #--S150-------------------------------------------------------------------------
+            #サービス呼び出し
+            userName = "福永祐一"
+            mailAddress = "fukunaga.y@jp.jra.com"
+            #loginID = "2018derby"
+            loginID = "2018derby" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+            loginPass = "wagnerian"
+            hyoka = 50
+            userComment = "シュバルグランが行ったぞ！大胆戦法福永祐一！"
+            loginKbn = "0"
+            json_S150 = S150_UserInfoTork.main(userName,mailAddress,loginID,loginPass,hyoka,userComment,loginKbn)
+            #個々の値を取得
+            flg_S150 = json_S150["json_CommonInfo"]["errflg"]
+            list_msgInfo_S150 = json_S150["json_CommonInfo"]["list_msgInfo"]
+            str_userID_S150 = json_S150["str_userID"]
+            #メッセージ格納
+            C030_MessageUtil.setMessageList(request,list_msgInfo_S150)
+            #検証用
+            json_shitsmnInfo_S180_S150Kensho = S180_UserInfoShutk.main(str_userID_S150)["json_userInfo"]
+            #-------------------------------------------------------------------------------
+            #--S160-------------------------------------------------------------------------
+            #サービス呼び出し
+            userID = "U20211018000000019"
+            userName = "横山たけし"
+            mailAddress = "yokoyama.t@jp.jra.com"
+            loginID = "goldship"
+            loginPass = "takaradsuka"
+            hyoka = 50
+            userComment = "お父さんの思い出"
+            json_S160 = S160_UserInfoKoshn.main(userID,userName,mailAddress,loginID,loginPass,hyoka,userComment)
+            #個々の値を取得
+            flg_S160 = json_S160["json_CommonInfo"]["errflg"]
+            list_msgInfo_S160 = json_S160["json_CommonInfo"]["list_msgInfo"]
+            str_userID_S150 = json_S160["str_userID"]
+            #メッセージ格納
+            C030_MessageUtil.setMessageList(request,list_msgInfo_S160)
+            json_shitsmnInfo_S180_S160Kensho = S180_UserInfoShutk.main(str_userID_S150)["json_userInfo"]
+            #-------------------------------------------------------------------------------
+            #--S170-------------------------------------------------------------------------
+            #サービス呼び出し
+            userID = "U20211018000000021"
+            json_S170 = S170_UserInfoSakj.main(userID)
+            #個々の値を取得
+            flg_S160 = json_S170["json_CommonInfo"]["errflg"]
+            list_msgInfo_S170 = json_S170["json_CommonInfo"]["list_msgInfo"]
+            str_userID_S170 = json_S170["str_userID"]
+            #メッセージ格納
+            C030_MessageUtil.setMessageList(request,list_msgInfo_S170)
+            json_shitsmnInfo_S180_S170Kensho = S180_UserInfoShutk.main(str_userID_S170)["json_userInfo"]
+            #-------------------------------------------------------------------------------
+            #--S180-------------------------------------------------------------------------
+            #サービス呼び出し
+            userID = "U20211018000000019"
+            json_S180 = S180_UserInfoShutk.main(userID)
+            #個々の値を取得
+            flg_S180 = json_S180["json_CommonInfo"]["errflg"]
+            list_msgInfo_S180 = json_S180["json_CommonInfo"]["list_msgInfo"]
+            json_userInfo_S180 = json_S180["json_userInfo"]
+            #メッセージ格納
+            C030_MessageUtil.setMessageList(request,list_msgInfo_S180)
+            #-------------------------------------------------------------------------------
+            #--S185-------------------------------------------------------------------------
+            #サービス呼び出し
+            loginID = "2018derby20211018-205142"
+            loginPass = "wagnerian"
+            json_S185 = S185_UserInfoShutk_SysLogin.main(loginID,loginPass)
+            #個々の値を取得
+            flg_S185 = json_S185["json_CommonInfo"]["errflg"]
+            list_msgInfo_S185 = json_S185["json_CommonInfo"]["list_msgInfo"]
+            str_userID_S185 = json_S185["str_userID"]
+            #メッセージ格納
+            C030_MessageUtil.setMessageList(request,list_msgInfo_S185)
+            #-------------------------------------------------------------------------------
             #--S900-------------------------------------------------------------------------
             json_S900 = S900_HanyoMstShutk.main("SEC0001","01")
             flg_S900 = json_S900["json_CommonInfo"]["errflg"]
@@ -192,6 +271,10 @@ def main(request):
                                     "json_shitsmnInfo":json_shitsmnInfo_S050,
                                     "tuple_shitsmnList_shinchk":tuple_T100_shitsmnList_shinchk_S060,
                                     "tuple_T100_shitsmnList_jokn":tuple_T100_shitsmnList_jokn_S070,
+                                    "json_shitsmnInfo_S180_S150Kensho" : json_shitsmnInfo_S180_S150Kensho,
+                                    "json_shitsmnInfo_S180_S160Kensho" : json_shitsmnInfo_S180_S160Kensho,
+                                    "json_userInfo_S180" : json_userInfo_S180,
+                                    "str_userID_S185" : str_userID_S185,
                                     "tuple_M110_kaigiJiknList_S090":tuple_M110_kaigiJiknList_S090,
                                     "tuple_hanyoMst":tuple_M101_hanyoMst_S900,
                                     "str_newID":str_newID_S905,

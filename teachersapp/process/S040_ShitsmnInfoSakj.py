@@ -73,10 +73,12 @@ def main(shitsmnID,updUserID):
         json_service = {"json_CommonInfo":json_CommonInfo, "str_shitsmnID":shitsmnID}
         return json_service
     #==例外処理==========================================================================================
-    except Exception as e :
+    except C020_DBUtil.MySQLDBException as e :
         #エラーフラグを立てる
         errflg = "1"
         #DB接続終了（ロールバック）
         C020_DBUtil.closeDB(json_DBConnectInfo,errflg)
+        raise
+    except Exception as e :
         raise
     #====================================================================================================

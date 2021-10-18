@@ -91,10 +91,12 @@ def main(keyWord,list_hashTag,date_From,date_To,selfQ_userID, selfRQ_userID):
         json_service = {"json_CommonInfo":json_CommonInfo, "tuple_T100_shitsmnList_jokn" : rows}
         return json_service
     #==例外処理==========================================================================================
-    except Exception as e :
+    except C020_DBUtil.MySQLDBException as e :
         #エラーフラグを立てる
         errflg = "1"
         #DB接続終了（ロールバック）
         C020_DBUtil.closeDB(json_DBConnectInfo,errflg)
+        raise
+    except Exception as e :
         raise
     #====================================================================================================
