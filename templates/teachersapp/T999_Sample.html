@@ -78,11 +78,43 @@
                 </div>
             {% endif %}
             <br>---------------------------------------------------------------------------------------------
+            <br><div class="debug">S080検証</div>
+            {% if tuple_hashTag_S080 %}
+                <div >
+                    {% for hashTag in tuple_hashTag_S080 %}
+                        <br>■{{ hashTag.HASHTAG}}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <br>---------------------------------------------------------------------------------------------
             <br><div class="debug">S090検証</div>
             {% if tuple_M110_kaigiJiknList_S090 %}
                 <div >
                     {% for kaigiJikn in tuple_M110_kaigiJiknList_S090 %}
                         <br>■{{ kaigiJikn.KAIGJKN_CD}},{{ kaigiJikn.KAIGJKN_TIME}},{{ kaigiJikn.KAIGJKN_DISP}}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <br>---------------------------------------------------------------------------------------------
+            <br><div class="debug">S100検証</div>
+            {% if json_kaitRQInfo_S130_S100Kensho %}
+                <div >
+                    <br>■{{ json_kaitRQInfo_S130_S100Kensho.KAIT_USERID}},{{ json_kaitRQInfo_S130_S100Kensho.KAIT_USERCOMMENT}}
+                </div>
+            {% endif %}
+            <br>---------------------------------------------------------------------------------------------
+            <br><div class="debug">S120検証</div>
+            {% if json_kaitRQInfo_S130_S120Kensho %}
+                <div >
+                    <br>■{{ json_kaitRQInfo_S130_S120Kensho.KAIT_USERID}},{{ json_kaitRQInfo_S130_S120Kensho.KAIT_USERCOMMENT}}
+                </div>
+            {% endif %}
+            <br>---------------------------------------------------------------------------------------------
+            <br><div class="debug">S140検証</div>
+            {% if tuple_T120_kaitRQList_S140 %}
+                <div >
+                    {% for json_kaitRQInfo in tuple_T120_kaitRQList_S140 %}
+                        <br>■{{ json_kaitRQInfo.KAIT_USERID}},{{ json_kaitRQInfo.KAIT_USERCOMMENT}}
                     {% endfor %}
                 </div>
             {% endif %}

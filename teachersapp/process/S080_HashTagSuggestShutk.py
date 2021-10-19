@@ -1,6 +1,6 @@
 """
 サービスクラス
-S060_SHITSMNLISTSHTK_SHINCHK
+S080_HashTagSuggestShutk
 
 戻り値：{共通項目、任意項目1、任意項目2、...}
         └共通項目：{実行結果（エラーフラグ）、メッセージリスト}
@@ -10,9 +10,9 @@ S060_SHITSMNLISTSHTK_SHINCHK
 from . import C020_DBUtil,C030_MessageUtil
 from . import S900_HanyoMstShutk
 
-SERVICE_ID = "S060"
+SERVICE_ID = "S080"
 
-def main():
+def main(keyword):
     #--戻り値用の変数宣言------------------------------------------------------------------------------
     errflg = "0"
     list_msgInfo = []
@@ -26,14 +26,15 @@ def main():
         list_msgInfo_S900 = json_S900["json_CommonInfo"]["list_msgInfo"]
         tuple_M101_hanyoMst_S900 = json_S900["tuple_M101_hanyoMst"]
         #-------------------------------------------------------------------------------
-        kensu = int(tuple_M101_hanyoMst_S900[0]["NAIYO01"])
+        kensu = int(tuple_M101_hanyoMst_S900[0]["NAIYO02"])
         #--DB連携基本コード----------------------------------------------------------------------------
         #DB接続開始、コネクションとカーソルを取得
         json_DBConnectInfo = C020_DBUtil.connectDB()
         #クエリを定義
-        sql = "select SHITSMN_ID,SHITSMN_TITLE,SHITSMN_NAIYO,SHITSMN_USERID,KAIGIID,CRTDATE,UPDDATE from t100_shitsmn where DELFLG = '0' order by crtdate desc limit %s ;"
+        sql = "select HASHTAG from T110_HASHTAG where HASHTAG like %s order by COUNTER desc limit  %s ;"
         #パラメータを定義
-        args = (kensu,)
+        keyword = keyword + "%"
+        args = (keyword,kensu,)
         #クエリを実行し、結果を取得
         rows = C020_DBUtil.executeSQL(json_DBConnectInfo,sql,args)
         #DB接続終了
@@ -44,7 +45,7 @@ def main():
         #戻り値の共通項目を作成
         json_CommonInfo = {"errflg":errflg, "list_msgInfo" : list_msgInfo}
         #戻り値を作成
-        json_service = {"json_CommonInfo":json_CommonInfo, "tuple_T100_shitsmnList_shinchk" : rows}
+        json_service = {"json_CommonInfo":json_CommonInfo, "tuple_hashTag" : rows}
         return json_service
     #==例外処理==========================================================================================
     except C020_DBUtil.MySQLDBException as e :

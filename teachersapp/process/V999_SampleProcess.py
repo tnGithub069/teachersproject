@@ -20,7 +20,12 @@ from . import (C010_Const,C030_MessageUtil,
                 S050_ShitsmnInfoShutk,
                 S060_ShitsmnListShutk_Shinchk,
                 S070_ShitsmnListShutk_Jokn,
+                S080_HashTagSuggestShutk,
                 S090_KaigiJiknListShutk,
+                S100_KaitRQTork,
+                S120_KaitRQSakj,
+                S130_KaitRQShutk,
+                S140_KaitRQListShutk,
                 S150_UserInfoTork,
                 S160_UserInfoKoshn,
                 S170_UserInfoSakj,
@@ -158,6 +163,17 @@ def main(request):
             #メッセージ格納
             C030_MessageUtil.setMessageList(request,list_msgInfo_S070)
             #-------------------------------------------------------------------------------
+            #--S080-------------------------------------------------------------------------
+            #サービス呼び出し
+            keyword = "天皇賞"
+            json_S080 = S080_HashTagSuggestShutk.main(keyword)
+            #個々の値を取得
+            flg_S080 = json_S080["json_CommonInfo"]["errflg"]
+            list_msgInfo_S080 = json_S080["json_CommonInfo"]["list_msgInfo"]
+            tuple_hashTag_S080 = json_S080["tuple_hashTag"]
+            #メッセージ格納
+            C030_MessageUtil.setMessageList(request,list_msgInfo_S080)
+            #-------------------------------------------------------------------------------
             #--S090-------------------------------------------------------------------------
             #サービス呼び出し
             json_S090 = S090_KaigiJiknListShutk.main()
@@ -167,6 +183,55 @@ def main(request):
             tuple_M110_kaigiJiknList_S090 = json_S090["tuple_M110_kaigiJiknList"]
             #メッセージ格納
             C030_MessageUtil.setMessageList(request,list_msgInfo_S090)
+            #-------------------------------------------------------------------------------
+            #--S100-------------------------------------------------------------------------
+            #サービス呼び出し
+            shitsmnID = "Q20210920000000001"
+            int_seq = 1
+            kaitUserID = "SYSTEM000000000000"
+            kaitUserComment = "マカヒキが来ました" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+            rqYukJikn = 12
+            rqYukKign = datetime.datetime.now()
+            json_S100 = S100_KaitRQTork.main(shitsmnID,int_seq,kaitUserID,kaitUserComment,rqYukJikn,rqYukKign)
+            #個々の値を取得
+            flg_S100 = json_S100["json_CommonInfo"]["errflg"]
+            list_msgInfo_S100 = json_S100["json_CommonInfo"]["list_msgInfo"]
+            str_shitsmnID_S100 = json_S100["shitsmnID"]
+            int_seq_S100 = json_S100["int_seq"]
+            int_rqSeq_S100 = json_S100["int_rqSeq"]
+            #メッセージ格納
+            C030_MessageUtil.setMessageList(request,list_msgInfo_S100)
+            #検証用
+            json_kaitRQInfo_S130_S100Kensho = S130_KaitRQShutk.main(str_shitsmnID_S100,int_seq_S100,int_rqSeq_S100)["json_kaitRQInfo"]
+            #-------------------------------------------------------------------------------
+            #--S120-------------------------------------------------------------------------
+            #サービス呼び出し
+            userID = "SYSTEM000000000000"
+            shitsmnID = "Q20210920000000001"
+            int_seq = 1
+            int_rqSeq = 4
+            json_S120 = S120_KaitRQSakj.main(userID,shitsmnID,int_seq,int_rqSeq)
+            #個々の値を取得
+            flg_S120 = json_S120["json_CommonInfo"]["errflg"]
+            list_msgInfo_S120 = json_S120["json_CommonInfo"]["list_msgInfo"]
+            str_shitsmnID_S120 = json_S120["shitsmnID"]
+            int_seq_S120 = json_S120["int_seq"]
+            int_rqSeq_S120 = json_S120["int_rqSeq"]
+            #メッセージ格納
+            C030_MessageUtil.setMessageList(request,list_msgInfo_S120)
+            json_kaitRQInfo_S130_S120Kensho = S130_KaitRQShutk.main(str_shitsmnID_S120,int_seq_S120,int_rqSeq_S120)["json_kaitRQInfo"]
+            #-------------------------------------------------------------------------------
+            #--S140-------------------------------------------------------------------------
+            #サービス呼び出し
+            shitsmnID = "Q20210920000000001"
+            int_seq = 1
+            json_S140 = S140_KaitRQListShutk.main(shitsmnID,int_seq)
+            #個々の値を取得
+            flg_S140 = json_S140["json_CommonInfo"]["errflg"]
+            list_msgInfo_S140 = json_S140["json_CommonInfo"]["list_msgInfo"]
+            tuple_T120_kaitRQList_S140 = json_S140["tuple_kaitRQList"]
+            #メッセージ格納
+            C030_MessageUtil.setMessageList(request,list_msgInfo_S140)
             #-------------------------------------------------------------------------------
             #--S150-------------------------------------------------------------------------
             #サービス呼び出し
@@ -271,6 +336,10 @@ def main(request):
                                     "json_shitsmnInfo":json_shitsmnInfo_S050,
                                     "tuple_shitsmnList_shinchk":tuple_T100_shitsmnList_shinchk_S060,
                                     "tuple_T100_shitsmnList_jokn":tuple_T100_shitsmnList_jokn_S070,
+                                    "tuple_hashTag_S080":tuple_hashTag_S080,
+                                    "json_kaitRQInfo_S130_S100Kensho":json_kaitRQInfo_S130_S100Kensho,
+                                    "json_kaitRQInfo_S130_S120Kensho":json_kaitRQInfo_S130_S120Kensho,
+                                    "tuple_T120_kaitRQList_S140":tuple_T120_kaitRQList_S140,
                                     "json_shitsmnInfo_S180_S150Kensho" : json_shitsmnInfo_S180_S150Kensho,
                                     "json_shitsmnInfo_S180_S160Kensho" : json_shitsmnInfo_S180_S160Kensho,
                                     "json_userInfo_S180" : json_userInfo_S180,

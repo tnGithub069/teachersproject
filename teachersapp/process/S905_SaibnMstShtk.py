@@ -25,13 +25,13 @@ def main(tableID,header):
         sysDate = datetime.date.today().strftime("%Y%m%d")
         
         #②シーケンステーブルから「①」で取得した日付の通番の最大値+1を取得する
-        sql_1 = "select MAX(SEQ) +1 AS NEWSEQ from " + tableID + " where SAIBNDATE = %s ;"
+        sql_1 = "select IFNULL(MAX(SEQ),0) +1 AS NEWSEQ from " + tableID + " where SAIBNDATE = %s ;"
         args_1 = (sysDate,)
-        str_newSeq = C020_DBUtil.executeSQL(json_DBConnectInfo,sql_1,args_1)[0]["NEWSEQ"]
+        int_newSeq = C020_DBUtil.executeSQL(json_DBConnectInfo,sql_1,args_1)[0]["NEWSEQ"]
         #　A. 取得行が0行の場合、「最大値+1=1」とする。 B.取得行が1行以上の場合、「最大値+1」を取得する。
-        int_newSeq = 1
-        if not C050_StringUtil.isNullCharacter(str_newSeq) :
-            int_newSeq = int(str_newSeq)
+        #int_newSeq = 1
+        #if not C050_StringUtil.isNullCharacter(str_newSeq) :
+        #    int_newSeq = int(str_newSeq)
 
         #③「①」の日付、「②」の最大値+1を、シーケンステーブルに登録する。
         sql_2 = "INSERT INTO " + tableID + " VALUES (%s,%s,current_timestamp(6));"
