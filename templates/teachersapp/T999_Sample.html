@@ -96,6 +96,15 @@
                 </div>
             {% endif %}
             <br>---------------------------------------------------------------------------------------------
+            <br><div class="debug">S095検証</div>
+            {% if tuple_M111_rqYukJiknList_S095 %}
+                <div >
+                    {% for yukjknInfo in tuple_M111_rqYukJiknList_S095 %}
+                        <br>■{{ yukjknInfo.YUKJKN_CD}},{{ yukjknInfo.YUKJKN_TIME}},{{ yukjknInfo.YUKJKN_DISP}}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <br>---------------------------------------------------------------------------------------------
             <br><div class="debug">S100検証</div>
             {% if json_kaitRQInfo_S130_S100Kensho %}
                 <div >

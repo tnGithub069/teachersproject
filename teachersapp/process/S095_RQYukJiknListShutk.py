@@ -1,6 +1,6 @@
 """
 サービスクラス
-S090_KaigiJiknListShutk
+S095_RQYukJiknListShutk
 
 戻り値：{共通項目、任意項目1、任意項目2、...}
         └共通項目：{実行結果（エラーフラグ）、メッセージリスト}
@@ -9,7 +9,7 @@ S090_KaigiJiknListShutk
 
 from . import C020_DBUtil,C030_MessageUtil
 
-SERVICE_ID = "S090"
+SERVICE_ID = "S095"
 
 def main():
     #--戻り値用の変数宣言------------------------------------------------------------------------------
@@ -22,7 +22,7 @@ def main():
         #DB接続開始、コネクションとカーソルを取得
         json_DBConnectInfo = C020_DBUtil.connectDB()
         #クエリを定義
-        sql = "select KAIGJKN_CD,KAIGJKN_TIME,KAIGJKN_DISP from m110_kaigjkn order by HYOJIJN asc ;"
+        sql = "select YUKJKN_CD,YUKJKN_TIME,YUKJKN_DISP from M111_RQYUKJKN order by HYOJIJN asc ;"
         #パラメータを定義
         args = ()
         #クエリを実行し、結果を取得
@@ -35,7 +35,7 @@ def main():
         #戻り値の共通項目を作成
         json_CommonInfo = {"errflg":errflg, "list_msgInfo" : list_msgInfo}
         #戻り値を作成
-        json_service = {"json_CommonInfo":json_CommonInfo, "tuple_M110_kaigiJiknList" : rows}
+        json_service = {"json_CommonInfo":json_CommonInfo, "tuple_M111_rqYukJiknList" : rows}
         return json_service
     #==例外処理==========================================================================================
     except C020_DBUtil.MySQLDBException as e :

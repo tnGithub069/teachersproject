@@ -22,6 +22,7 @@ from . import (C010_Const,C030_MessageUtil,
                 S070_ShitsmnListShutk_Jokn,
                 S080_HashTagSuggestShutk,
                 S090_KaigiJiknListShutk,
+                S095_RQYukJiknListShutk,
                 S100_KaitRQTork,
                 S120_KaitRQSakj,
                 S130_KaitRQShutk,
@@ -184,6 +185,16 @@ def main(request):
             #メッセージ格納
             C030_MessageUtil.setMessageList(request,list_msgInfo_S090)
             #-------------------------------------------------------------------------------
+            #--S095-------------------------------------------------------------------------
+            #サービス呼び出し
+            json_S095 = S095_RQYukJiknListShutk.main()
+            #個々の値を取得
+            flg_S095 = json_S095["json_CommonInfo"]["errflg"]
+            list_msgInfo_S095 = json_S095["json_CommonInfo"]["list_msgInfo"]
+            tuple_M111_rqYukJiknList_S095 = json_S095["tuple_M111_rqYukJiknList"]
+            #メッセージ格納
+            C030_MessageUtil.setMessageList(request,list_msgInfo_S095)
+            #-------------------------------------------------------------------------------
             #--S100-------------------------------------------------------------------------
             #サービス呼び出し
             shitsmnID = "Q20210920000000001"
@@ -337,6 +348,8 @@ def main(request):
                                     "tuple_shitsmnList_shinchk":tuple_T100_shitsmnList_shinchk_S060,
                                     "tuple_T100_shitsmnList_jokn":tuple_T100_shitsmnList_jokn_S070,
                                     "tuple_hashTag_S080":tuple_hashTag_S080,
+                                    "tuple_M110_kaigiJiknList_S090":tuple_M110_kaigiJiknList_S090,
+                                    "tuple_M111_rqYukJiknList_S095":tuple_M111_rqYukJiknList_S095,
                                     "json_kaitRQInfo_S130_S100Kensho":json_kaitRQInfo_S130_S100Kensho,
                                     "json_kaitRQInfo_S130_S120Kensho":json_kaitRQInfo_S130_S120Kensho,
                                     "tuple_T120_kaitRQList_S140":tuple_T120_kaitRQList_S140,
@@ -344,7 +357,6 @@ def main(request):
                                     "json_shitsmnInfo_S180_S160Kensho" : json_shitsmnInfo_S180_S160Kensho,
                                     "json_userInfo_S180" : json_userInfo_S180,
                                     "str_userID_S185" : str_userID_S185,
-                                    "tuple_M110_kaigiJiknList_S090":tuple_M110_kaigiJiknList_S090,
                                     "tuple_hanyoMst":tuple_M101_hanyoMst_S900,
                                     "str_newID":str_newID_S905,
                                     }
